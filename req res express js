@@ -1,0 +1,35 @@
+const express = require('express');
+const app = express();
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Define routes
+
+// GET route for the root URL
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+// GET route to fetch a user by ID
+app.get('/user/:id', (req, res) => {
+  const userId = req.params.id;
+
+  // Simulate fetching user data
+  const user = { id: userId, name: 'Vijay' };
+  res.json(user); // Send JSON response
+});
+
+// POST route to create a new user
+app.post('/user', (req, res) => {
+  const newUser = req.body; // Get user data from the request body
+
+  // Simulate saving user data
+  res.status(201).json(newUser); // Send back created user
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
